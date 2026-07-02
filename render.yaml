@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: football-stats-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # You'll set this manually from Supabase
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: Cors__AllowedOrigins__0
+        sync: false  # Set to your Vercel URL after deploy

@@ -1,0 +1,10 @@
+**/.git
+**/node_modules
+**/bin
+**/obj
+**/.vs
+**/frontend
+**/tests
+**/.kiro
+*.md
+.gitignore
