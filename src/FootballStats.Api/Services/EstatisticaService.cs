@@ -15,15 +15,19 @@ public class EstatisticaService : IEstatisticaService
 
     public async Task<List<EstatisticaJogador>> ObterPlacarGeralAsync()
     {
-        var placar = await _context.Jogadores
+        var jogadores = await _context.Jogadores
             .AsNoTracking()
+            .Include(j => j.Registros)
+            .ToListAsync();
+
+        var placar = jogadores
             .Select(j => new EstatisticaJogador(
                 j.Nome,
                 j.Registros.Sum(r => r.Gols),
                 j.Registros.Sum(r => r.Assistencias)))
             .OrderByDescending(e => e.TotalGols)
             .ThenByDescending(e => e.TotalAssistencias)
-            .ToListAsync();
+            .ToList();
 
         return placar;
     }
