@@ -26,13 +26,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     if (!string.IsNullOrEmpty(databaseUrl))
     {
-        // Force IPv4 resolution to avoid IPv6 unreachable errors on Render
-        var connStr = databaseUrl;
-        if (!connStr.Contains("Resolve=", StringComparison.OrdinalIgnoreCase))
-        {
-            connStr = connStr.TrimEnd(';') + ";Resolve=ipv4";
-        }
-        options.UseNpgsql(connStr);
+        options.UseNpgsql(databaseUrl);
     }
     else
     {
